@@ -1,0 +1,54 @@
+.flex {
+    display: flex;
+    align-items: center;
+}
+
+.flex-end {
+    align-items: flex-end;
+}
+
+td a {
+    color: rgb(47, 47, 47);
+}
+
+button a {
+    text-decoration: none;
+    color: rgb(222, 222, 222);
+}
+
+.btn-outline-danger a {
+    color: rgb(141, 21, 21);
+}
+
+.btn-outline-danger:hover > a {
+    color: rgb(255, 255, 255);
+}
+
+.btn-outline-danger {
+    margin-left: 1rem;
+}
+
+.ml-1 {
+    margin-left: 1rem;
+}
+
+button a:hover {
+    color: rgb(255, 255, 255);
+}
+
+.right {
+    justify-content: space-between;
+}
+
+.dropdown-menu.show {
+    display: block;
+    position: absolute;
+    top: 40px;
+}
+
+.form-text-error {
+    margin-left: 0.2rem;
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: #bc0c0c;
+}

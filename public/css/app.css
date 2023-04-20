@@ -1,0 +1,86 @@
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.flex-end {
+  align-items: flex-end;
+}
+
+td a {
+  color: rgb(47, 47, 47);
+}
+
+button a {
+  text-decoration: none;
+  color: rgb(222, 222, 222);
+}
+
+.btn-outline-danger a {
+  color: rgb(141, 21, 21);
+}
+
+.btn-outline-danger:hover > a {
+  color: rgb(255, 255, 255);
+}
+
+.btn-outline-danger {
+  margin-left: 1rem;
+}
+
+.ml-1 {
+  margin-left: 1rem;
+}
+
+button a:hover {
+  color: rgb(255, 255, 255);
+}
+
+.right {
+  justify-content: space-between;
+}
+
+.dropdown-menu.show {
+  display: block;
+  position: absolute;
+  top: 40px;
+}
+
+.form-text-error {
+  margin-left: 0.2rem;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: #bc0c0c;
+}
+
+.navigation-header {
+  background-color: white;
+  overflow: hidden;
+  z-index: 10;
+}
+.navigation-header .navigation {
+  font-size: 1rem;
+  margin: 1em auto 1.5em;
+  padding: 0 1.05em;
+  display: inline-block;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.navigation-header .navigation a {
+  color: black;
+  font-size: 1.1em;
+  font-weight: 800;
+  text-decoration: none;
+  position: relative;
+  border-radius: 4px;
+  padding: 0.575em 0.65em;
+  display: inline-block;
+  z-index: 20;
+}
+.navigation-header .navigation a:focus, .navigation-header .navigation a:hover {
+  color: #0d6efd;
+}
+.navigation-header .navigation a.router-link-exact-active {
+  color: #0d6efd;
+}
+

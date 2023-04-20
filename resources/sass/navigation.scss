@@ -1,0 +1,37 @@
+.navigation-header {
+    background-color: white;
+    overflow: hidden;
+    z-index: 10;
+
+    .navigation {
+        font-size: 1rem;
+        margin: 1em auto 1.5em;
+        padding: 0 1.05em;
+        display: inline-block;
+
+        vertical-align: middle;
+        white-space: nowrap;
+
+        a {
+            color: black;
+            font-size: 1.1em;
+            font-weight: 800;
+            text-decoration: none;
+            position: relative;
+            border-radius: 4px;
+
+            padding: 0.575em 0.65em;
+            display: inline-block;
+            z-index: 20;
+
+            &:focus,
+            &:hover {
+                color: $blue;
+            }
+
+            &.router-link-exact-active {
+                color: $blue;
+            }
+        }
+    }
+}
