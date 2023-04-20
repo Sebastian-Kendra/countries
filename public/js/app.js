@@ -20196,13 +20196,11 @@ __webpack_require__.r(__webpack_exports__);
     nextPage: function nextPage() {
       if (this.countriesLen >= 10) {
         this.$emit("page-selected", +1);
-        /* this.currentPage++; emit */
       }
     },
     previousPage: function previousPage() {
       if (this.currentPage > 1) {
         this.$emit("page-selected", -1);
-        /* this.currentPage--; emit */
       }
     }
   }
@@ -20295,11 +20293,14 @@ __webpack_require__.r(__webpack_exports__);
         display_order: 900
       };
       axios.post("/api/countries", data).then(function (response) {
+        _this.errors = {};
         console.log(response);
       })["catch"](function (errors) {
         _this.errors = errors.response.data.errors;
       }).then(function () {
-        _this.$router.push("/");
+        if (_this.errors.length === 0) {
+          _this.$router.push("/");
+        }
       });
     }
   }

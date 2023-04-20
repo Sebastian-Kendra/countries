@@ -36,13 +36,11 @@ export default {
         nextPage() {
             if (this.countriesLen >= 10) {
                 this.$emit("page-selected", +1);
-                /* this.currentPage++; emit */
             }
         },
         previousPage() {
             if (this.currentPage > 1) {
                 this.$emit("page-selected", -1);
-                /* this.currentPage--; emit */
             }
         },
     },

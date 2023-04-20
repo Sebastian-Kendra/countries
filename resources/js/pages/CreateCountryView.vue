@@ -133,13 +133,16 @@ export default {
             axios
                 .post("/api/countries", data)
                 .then((response) => {
+                    this.errors = {};
                     console.log(response);
                 })
                 .catch((errors) => {
                     this.errors = errors.response.data.errors;
                 })
                 .then(() => {
-                    this.$router.push("/");
+                    if (this.errors.length === 0) {
+                        this.$router.push("/");
+                    }
                 });
         },
     },
