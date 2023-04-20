@@ -20575,7 +20575,7 @@ function render(_ctx, _cache) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Countries ")];
     }),
     _: 1 /* STABLE */
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Prepare for future "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <router-link to=\"/continents\"> Continents </router-link>\n            <router-link to=\"/countries\"> Countries </router-link> ")])]);
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Prepare for future "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <router-link to=\"/continents\"> Continents </router-link>\r\n            <router-link to=\"/countries\"> Countries </router-link> ")])]);
 }
 
 /***/ }),
@@ -20964,7 +20964,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nbody {\n    font-family: \"Nunito\", sans-serif;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nbody {\r\n    font-family: \"Nunito\", sans-serif;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
