@@ -20576,7 +20576,7 @@ function render(_ctx, _cache) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Countries ")];
     }),
     _: 1 /* STABLE */
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Prepare for future "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <router-link to=\"/continents\"> Continents </router-link>\r\n            <router-link to=\"/countries\"> Countries </router-link> ")])]);
+  })])]);
 }
 
 /***/ }),
@@ -20925,21 +20925,7 @@ var routes = [{
   path: "/:catchAll(.*)",
   name: "not-found",
   component: _pages_NotFound_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
-}
-
-/* ? Routes for future
-{
-    path: "/continents",
-    name: "continents",
-    Lazy loading if we needed
-    component: () => import(/* webpackChunkName: "countries"  '../pages/CountriesView.vue')
-},
-{
-    path: "/countries",
-    name: "countries",
-    component: CountriesView,
-},  ? */];
-
+}];
 var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_4__.createRouter)({
   history: (0,vue_router__WEBPACK_IMPORTED_MODULE_4__.createWebHistory)(process.env.BASE_URL),
   routes: routes

@@ -30,6 +30,7 @@
                     <td>{{ country.continent_code }}</td>
                 </tr>
             </tbody>
+
             <PaginateNav
                 :countries-len="displayedCountries.length"
                 :current-page="currentPage"

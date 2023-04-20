@@ -27,19 +27,6 @@ const routes = [
         name: "not-found",
         component: NotFound,
     },
-
-    /* ? Routes for future
-    {
-        path: "/continents",
-        name: "continents",
-        Lazy loading if we needed
-        component: () => import(/* webpackChunkName: "countries"  '../pages/CountriesView.vue')
-    },
-    {
-        path: "/countries",
-        name: "countries",
-        component: CountriesView,
-    },  ? */
 ];
 
 const router = createRouter({
