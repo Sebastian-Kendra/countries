@@ -1,4 +1,5 @@
 <template>
+    <!-- Not found commponent -->
     <div class="flex not-found">
         <h1 class="title is-4">404 NOT FOUND</h1>
 
@@ -10,10 +11,7 @@
     </div>
 </template>
 
-<script>
-export default {};
-</script>
-
+<!-- Styles -->
 <style lang="scss" scoped>
 .not-found {
     flex-direction: column;

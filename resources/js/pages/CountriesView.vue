@@ -13,6 +13,7 @@
 </template>
 
 <script>
+/* Imports */
 import CountriesList from "../commponents/CountriesList.vue";
 
 export default {

@@ -1,4 +1,5 @@
 <template>
+    <!-- Drop down -->
     <div class="btn-group ml-1">
         <button
             type="button"
@@ -39,9 +40,11 @@ export default {
         };
     },
     methods: {
+        // Function to close the dropdown menu
         closeDropdown() {
             this.isOpen = false;
         },
+        // Function to handle sorting event and emit the sort direction to parent component
         sort(direction) {
             this.$emit("sort", direction);
         },

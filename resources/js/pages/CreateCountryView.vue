@@ -126,6 +126,8 @@ export default {
         };
     },
     methods: {
+        /* Sends a post request to the specified API endpoint 
+            with the country data */
         submitForm() {
             let data = {
                 code: this.countryCode,
@@ -138,14 +140,16 @@ export default {
             };
             axios
                 .post("/api/countries", data)
-                .then((response) => {
+                .then(() => {
+                    // Resets the errors array
                     this.errors = {};
-                    console.log(response);
                 })
                 .catch((errors) => {
+                    // Sets the errors array to any errors returned by the API
                     this.errors = errors.response.data.errors;
                 })
                 .then(() => {
+                    // If there are no errors, navigate to the home page
                     if (this.errors.length === 0) {
                         this.$router.push("/");
                     }

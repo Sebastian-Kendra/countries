@@ -1,3 +1,4 @@
+/* Import router */
 import { createRouter, createWebHistory } from "vue-router";
 
 /* Import Views */
@@ -6,6 +7,7 @@ import CountryView from "../pages/CountryView.vue";
 import CreateCountryView from "../pages/CreateCountryView.vue";
 import NotFound from "../pages/NotFound.vue";
 
+/* Routes */
 const routes = [
     {
         path: "/",
@@ -29,6 +31,7 @@ const routes = [
     },
 ];
 
+/* Create history */
 const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),
     routes,

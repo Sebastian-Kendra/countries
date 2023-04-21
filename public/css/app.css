@@ -62,10 +62,12 @@ button a:hover {
   margin-left: 1rem;
 }
 
+/* Container */
 .navigation-header {
   background-color: var(--bs-white);
   overflow: hidden;
   z-index: 10;
+  /* Nav */
 }
 .navigation-header .navigation {
   font-size: 1rem;
@@ -74,6 +76,7 @@ button a:hover {
   display: inline-block;
   vertical-align: middle;
   white-space: nowrap;
+  /* Link */
 }
 .navigation-header .navigation a {
   color: var(--bs-gray-900);

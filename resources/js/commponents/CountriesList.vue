@@ -7,6 +7,7 @@
             />
         </div>
 
+        <!-- Table countries -->
         <table class="table mt-2">
             <thead>
                 <tr>
@@ -41,6 +42,7 @@
 </template>
 
 <script>
+/* Imports */
 import { throttle } from "lodash";
 import DropDown from "./DropDown.vue";
 import ContinentSelect from "./ContinentSelect.vue";
@@ -59,10 +61,12 @@ export default {
         };
     },
     mounted() {
+        // populate countries array with data from API
         axios.get("/api/countries/").then((response) => {
             this.countries = response.data.data;
         });
 
+        // load more countries
         this.loadMore();
     },
     computed: {
@@ -72,28 +76,35 @@ export default {
             let filteredCountries = this.countries;
 
             if (this.sortDirection === "asc") {
+                // sort countries in ascending order based on name
                 this.countries.sort((a, b) => a.name.localeCompare(b.name));
             } else if (this.sortDirection === "desc") {
+                // sort countries in descending order based on name
                 this.countries.sort((a, b) => b.name.localeCompare(a.name));
             }
 
             if (this.selectedContinent !== "") {
+                // filter countries based on selected continent
                 filteredCountries = this.countries.filter(
                     (country) =>
                         country.continent_code === this.selectedContinent
                 );
             }
+            // return the array of countries to be displayed on the current page
             return filteredCountries.slice(start, end);
         },
     },
     methods: {
         sortByAplphabet(direction) {
+            // set sorting direction
             this.sortDirection = direction;
         },
         updateSelectedContinent(currentContinent) {
+            // update selected continent filter
             this.selectedContinent = currentContinent;
         },
         onPageSelected(direction) {
+            // update current page based on navigation direction
             this.currentPage = this.currentPage + direction;
         },
         async loadMore() {
@@ -103,6 +114,7 @@ export default {
                 await axios
                     .get(`/api/countries?page=${page}`)
                     .then((response) => {
+                        // append fetched countries to the existing countries array
                         if (response.data.data.length > 0) {
                             this.countries = [
                                 ...this.countries,

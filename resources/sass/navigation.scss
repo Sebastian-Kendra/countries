@@ -1,8 +1,10 @@
+/* Container */
 .navigation-header {
     background-color: var(--bs-white);
     overflow: hidden;
     z-index: 10;
 
+    /* Nav */
     .navigation {
         font-size: 1rem;
         margin: 1em auto 1.5em;
@@ -12,6 +14,7 @@
         vertical-align: middle;
         white-space: nowrap;
 
+        /* Link */
         a {
             color: var(--bs-gray-900);
             font-size: 1.1em;

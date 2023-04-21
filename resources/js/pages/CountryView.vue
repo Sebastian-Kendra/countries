@@ -37,11 +37,14 @@ export default {
     },
     created() {
         axios
+            // Make a GET request to the API endpoint for the specific country
             .get("/api/countries/" + this.$route.params.id)
             .then((response) => {
+                // Update the current country object with the response data
                 this.currCountry = response.data;
             })
             .catch((error) => {
+                // Handle errors by redirecting to the catch-all route
                 this.$router.push("/:catchAll(.*)");
             });
     },

@@ -1,5 +1,6 @@
 <template>
     <nav>
+        <!-- Paginate navigation -->
         <ul class="pagination">
             <li class="page-item">
                 <button
@@ -34,11 +35,15 @@ export default {
     },
     methods: {
         nextPage() {
+            // If the number of countries is greater than or equal to 10,
+            // emit a 'page-selected' event with a value of +1
             if (this.countriesLen >= 10) {
                 this.$emit("page-selected", +1);
             }
         },
         previousPage() {
+            // If the current page is greater than 1,
+            // emit a 'page-selected' event with a value of -1
             if (this.currentPage > 1) {
                 this.$emit("page-selected", -1);
             }
