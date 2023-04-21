@@ -105,9 +105,12 @@
                 >
                     Submit
                 </button>
-                <button type="button" class="btn btn-outline-danger">
-                    <router-link to="/"> Cancel </router-link>
-                </button>
+
+                <router-link to="/">
+                    <button type="button" class="btn btn-outline-danger">
+                        Cancel
+                    </button>
+                </router-link>
             </form>
         </div>
     </div>
@@ -142,7 +145,7 @@ export default {
                 .post("/api/countries", data)
                 .then(() => {
                     // Resets the errors array
-                    this.errors = {};
+                    this.errors = [];
                 })
                 .catch((errors) => {
                     // Sets the errors array to any errors returned by the API

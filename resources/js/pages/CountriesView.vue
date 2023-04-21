@@ -2,11 +2,12 @@
     <div>
         <div class="flex right mb-4">
             <h1>Countries</h1>
-            <button type="button " class="btn btn-success">
-                <router-link to="/create-countries">
+
+            <router-link to="/create-countries">
+                <button type="button " class="btn btn-success">
                     Add new country
-                </router-link>
-            </button>
+                </button>
+            </router-link>
         </div>
         <CountriesList />
     </div>
