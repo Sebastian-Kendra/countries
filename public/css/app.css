@@ -11,6 +11,16 @@ td a {
   color: rgb(47, 47, 47);
 }
 
+.container-flex {
+  display: flex;
+  justify-content: center;
+}
+
+.create-form h1 {
+  padding-right: 1.5em;
+  padding-left: 1.5em;
+}
+
 button a {
   text-decoration: none;
   color: rgb(222, 222, 222);
@@ -25,10 +35,6 @@ button a {
 }
 
 .btn-outline-danger {
-  margin-left: 1rem;
-}
-
-.ml-1 {
   margin-left: 1rem;
 }
 
