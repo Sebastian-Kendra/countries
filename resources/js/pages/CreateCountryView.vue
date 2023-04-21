@@ -117,6 +117,8 @@
 </template>
 
 <script>
+import router from "../router/index";
+
 export default {
     data() {
         return {
@@ -154,7 +156,7 @@ export default {
                 .then(() => {
                     // If there are no errors, navigate to the home page
                     if (this.errors.length === 0) {
-                        this.$router.push("/");
+                        router.push("/");
                     }
                 });
         },

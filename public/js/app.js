@@ -20295,6 +20295,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _router_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../router/index */ "./resources/js/router/index.js");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -20329,7 +20331,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function () {
         // If there are no errors, navigate to the home page
         if (_this.errors.length === 0) {
-          _this.$router.push("/");
+          _router_index__WEBPACK_IMPORTED_MODULE_0__["default"].push("/");
         }
       });
     }
