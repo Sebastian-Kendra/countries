@@ -1,5 +1,5 @@
 .navigation-header {
-    background-color: white;
+    background-color: var(--bs-white);
     overflow: hidden;
     z-index: 10;
 
@@ -13,7 +13,7 @@
         white-space: nowrap;
 
         a {
-            color: black;
+            color: var(--bs-gray-900);
             font-size: 1.1em;
             font-weight: 800;
             text-decoration: none;
@@ -26,11 +26,11 @@
 
             &:focus,
             &:hover {
-                color: $blue;
+                color: var(--bs-blue);
             }
 
             &.router-link-exact-active {
-                color: $blue;
+                color: var(--bs-blue);
             }
         }
     }
