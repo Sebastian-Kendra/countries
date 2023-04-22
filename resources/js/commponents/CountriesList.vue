@@ -43,7 +43,7 @@
 
 <script>
 /* Imports */
-import { throttle } from "lodash";
+/* import { throttle } from "lodash"; */
 import DropDown from "./DropDown.vue";
 import ContinentSelect from "./ContinentSelect.vue";
 import PaginateNav from "./PaginateNav.vue";
@@ -65,9 +65,6 @@ export default {
         axios.get("/api/countries/").then((response) => {
             this.countries = response.data.data;
         });
-
-        // load more countries
-        this.loadMore();
     },
     computed: {
         displayedCountries() {
@@ -105,28 +102,22 @@ export default {
         },
         onPageSelected(direction) {
             // update current page based on navigation direction
-            this.currentPage = this.currentPage + direction;
+            if (direction === 1) {
+                this.loadNext();
+                this.currentPage = this.currentPage + direction;
+            } else {
+                this.currentPage = this.currentPage + direction;
+            }
         },
-        async loadMore() {
-            let page = this.currentPage + 1;
-            // Repeat until all records are loaded
-            while (!this.isAllDataLoaded) {
-                await axios
-                    .get(`/api/countries?page=${page}`)
-                    .then((response) => {
-                        // append fetched countries to the existing countries array
-                        if (response.data.data.length > 0) {
-                            this.countries = [
-                                ...this.countries,
-                                ...response.data.data,
-                            ];
-                            page++;
-                        } else {
-                            this.isAllDataLoaded = true;
-                        }
-                    });
-                // Wait 500ms before next request
-                await new Promise((resolve) => throttle(resolve, 500)());
+        async loadNext() {
+            const nextPage = this.currentPage + 1;
+            const response = await axios.get(`/api/countries?page=${nextPage}`);
+            const newCountries = response.data.data;
+            if (newCountries.length > 0) {
+                this.countries = [...this.countries, ...newCountries];
+                this.currentPage = nextPage;
+            } else {
+                this.isAllDataLoaded = true;
             }
         },
     },
