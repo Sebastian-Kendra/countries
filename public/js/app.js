@@ -20100,6 +20100,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     updateSelectedContinent: function updateSelectedContinent(currentContinent) {
       // update selected continent filter
       this.selectedContinent = currentContinent;
+      this.currentPage = 1;
     },
     onPageSelected: function onPageSelected(direction) {
       // update current page based on navigation direction

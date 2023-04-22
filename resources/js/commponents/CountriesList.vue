@@ -99,6 +99,7 @@ export default {
         updateSelectedContinent(currentContinent) {
             // update selected continent filter
             this.selectedContinent = currentContinent;
+            this.currentPage = 1;
         },
         onPageSelected(direction) {
             // update current page based on navigation direction
