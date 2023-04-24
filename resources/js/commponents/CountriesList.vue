@@ -43,7 +43,6 @@
 
 <script>
 /* Imports */
-/* import { throttle } from "lodash"; */
 import DropDown from "./DropDown.vue";
 import ContinentSelect from "./ContinentSelect.vue";
 import PaginateNav from "./PaginateNav.vue";
@@ -58,12 +57,14 @@ export default {
             sortDirection: "",
             isOpen: false,
             selectedContinent: "",
+            totalCountries: 0,
         };
     },
     mounted() {
         // populate countries array with data from API
         axios.get("/api/countries/").then((response) => {
             this.countries = response.data.data;
+            this.totalCountries = response.data.total;
         });
     },
     computed: {
@@ -74,10 +75,10 @@ export default {
 
             if (this.sortDirection === "asc") {
                 // sort countries in ascending order based on name
-                this.countries.sort((a, b) => a.name.localeCompare(b.name));
+                filteredCountries.sort((a, b) => a.name.localeCompare(b.name));
             } else if (this.sortDirection === "desc") {
                 // sort countries in descending order based on name
-                this.countries.sort((a, b) => b.name.localeCompare(a.name));
+                filteredCountries.sort((a, b) => b.name.localeCompare(a.name));
             }
 
             if (this.selectedContinent !== "") {
@@ -110,6 +111,7 @@ export default {
                 this.currentPage = this.currentPage + direction;
             }
         },
+        // load next page
         async loadNext() {
             const nextPage = this.currentPage + 1;
             const response = await axios.get(`/api/countries?page=${nextPage}`);

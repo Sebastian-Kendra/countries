@@ -20042,7 +20042,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 /* Imports */
-/* import { throttle } from "lodash"; */
 
 
 
@@ -20055,7 +20054,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       isAllDataLoaded: false,
       sortDirection: "",
       isOpen: false,
-      selectedContinent: ""
+      selectedContinent: "",
+      totalCountries: 0
     };
   },
   mounted: function mounted() {
@@ -20063,6 +20063,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     // populate countries array with data from API
     axios.get("/api/countries/").then(function (response) {
       _this.countries = response.data.data;
+      _this.totalCountries = response.data.total;
     });
   },
   computed: {
@@ -20073,12 +20074,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var filteredCountries = this.countries;
       if (this.sortDirection === "asc") {
         // sort countries in ascending order based on name
-        this.countries.sort(function (a, b) {
+        filteredCountries.sort(function (a, b) {
           return a.name.localeCompare(b.name);
         });
       } else if (this.sortDirection === "desc") {
         // sort countries in descending order based on name
-        this.countries.sort(function (a, b) {
+        filteredCountries.sort(function (a, b) {
           return b.name.localeCompare(a.name);
         });
       }
@@ -20111,6 +20112,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         this.currentPage = this.currentPage + direction;
       }
     },
+    // load next page
     loadNext: function loadNext() {
       var _this3 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
