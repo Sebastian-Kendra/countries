@@ -20049,6 +20049,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       countries: [],
+      loadedCountries: [],
       currentPage: 1,
       perPage: 10,
       isAllDataLoaded: false,
@@ -20062,7 +20063,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var _this = this;
     // populate countries array with data from API
     axios.get("/api/countries/").then(function (response) {
-      _this.countries = response.data.data;
+      _this.loadedCountries = response.data.data;
+      _this.countries = _this.loadedCountries;
       _this.totalCountries = response.data.total;
     });
   },
@@ -20072,6 +20074,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var start = (this.currentPage - 1) * this.perPage;
       var end = start + this.perPage;
       var filteredCountries = this.countries;
+
+      // TODO: prerobit filter
       if (this.sortDirection === "asc") {
         // sort countries in ascending order based on name
         filteredCountries.sort(function (a, b) {
@@ -20105,6 +20109,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     onPageSelected: function onPageSelected(direction) {
       // update current page based on navigation direction
+      // TODO: prerobit loadNext
       if (direction === 1) {
         this.loadNext();
         this.currentPage = this.currentPage + direction;
@@ -20113,6 +20118,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     },
     // load next page
+    // TODO: prerobit loadNext
     loadNext: function loadNext() {
       var _this3 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -20120,19 +20126,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
-              nextPage = _this3.currentPage + 1;
-              _context.next = 3;
+              nextPage = _this3.currentPage + 1; // overiť, či už boli načítané všetky krajiny
+              if (_this3.isAllDataLoaded) {
+                _context.next = 7;
+                break;
+              }
+              _context.next = 4;
               return axios.get("/api/countries?page=".concat(nextPage));
-            case 3:
+            case 4:
               response = _context.sent;
-              newCountries = response.data.data;
+              newCountries = response.data.data.filter(function (country) {
+                return !_this3.loadedCountries.includes(country);
+              }); // len nové krajiny
               if (newCountries.length > 0) {
-                _this3.countries = [].concat(_toConsumableArray(_this3.countries), _toConsumableArray(newCountries));
+                _this3.loadedCountries = [].concat(_toConsumableArray(_this3.loadedCountries), _toConsumableArray(newCountries)); // pridá nové krajiny do pole na uchovávanie načítaných krajín
+                _this3.countries = [].concat(_toConsumableArray(_this3.countries), _toConsumableArray(newCountries)).slice(0, nextPage * _this3.perPage); // pridá nové krajiny do zobrazených krajín
                 _this3.currentPage = nextPage;
               } else {
                 _this3.isAllDataLoaded = true;
               }
-            case 6:
+            case 7:
             case "end":
               return _context.stop();
           }

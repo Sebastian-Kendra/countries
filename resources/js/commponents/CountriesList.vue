@@ -51,6 +51,7 @@ export default {
     data() {
         return {
             countries: [],
+            loadedCountries: [],
             currentPage: 1,
             perPage: 10,
             isAllDataLoaded: false,
@@ -63,7 +64,8 @@ export default {
     mounted() {
         // populate countries array with data from API
         axios.get("/api/countries/").then((response) => {
-            this.countries = response.data.data;
+            this.loadedCountries = response.data.data;
+            this.countries = this.loadedCountries;
             this.totalCountries = response.data.total;
         });
     },
@@ -73,6 +75,7 @@ export default {
             const end = start + this.perPage;
             let filteredCountries = this.countries;
 
+            // TODO: prerobit filter
             if (this.sortDirection === "asc") {
                 // sort countries in ascending order based on name
                 filteredCountries.sort((a, b) => a.name.localeCompare(b.name));
@@ -104,6 +107,7 @@ export default {
         },
         onPageSelected(direction) {
             // update current page based on navigation direction
+            // TODO: prerobit loadNext
             if (direction === 1) {
                 this.loadNext();
                 this.currentPage = this.currentPage + direction;
@@ -112,15 +116,30 @@ export default {
             }
         },
         // load next page
+        // TODO: prerobit loadNext
         async loadNext() {
             const nextPage = this.currentPage + 1;
-            const response = await axios.get(`/api/countries?page=${nextPage}`);
-            const newCountries = response.data.data;
-            if (newCountries.length > 0) {
-                this.countries = [...this.countries, ...newCountries];
-                this.currentPage = nextPage;
-            } else {
-                this.isAllDataLoaded = true;
+            // overiť, či už boli načítané všetky krajiny
+            if (!this.isAllDataLoaded) {
+                const response = await axios.get(
+                    `/api/countries?page=${nextPage}`
+                );
+                const newCountries = response.data.data.filter(
+                    (country) => !this.loadedCountries.includes(country)
+                ); // len nové krajiny
+                if (newCountries.length > 0) {
+                    this.loadedCountries = [
+                        ...this.loadedCountries,
+                        ...newCountries,
+                    ]; // pridá nové krajiny do pole na uchovávanie načítaných krajín
+                    this.countries = [...this.countries, ...newCountries].slice(
+                        0,
+                        nextPage * this.perPage
+                    ); // pridá nové krajiny do zobrazených krajín
+                    this.currentPage = nextPage;
+                } else {
+                    this.isAllDataLoaded = true;
+                }
             }
         },
     },
