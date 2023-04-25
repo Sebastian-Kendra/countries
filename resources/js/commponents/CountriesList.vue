@@ -78,7 +78,6 @@ export default {
             const end = start + this.perPage;
             let filteredCountries = this.countries;
 
-            // TODO: prerobit filter
             if (this.sortDirection === "asc") {
                 // sort countries in ascending order based on name
                 filteredCountries.sort((a, b) => a.name.localeCompare(b.name));
@@ -119,7 +118,6 @@ export default {
             }
         },
         // load next page
-        // TODO: prerobit loadNext
         async loadNext() {
             if (this.isLoading || this.isAllDataLoaded) {
                 return;

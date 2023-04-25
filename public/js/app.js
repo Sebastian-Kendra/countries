@@ -20077,8 +20077,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var start = (this.currentPage - 1) * this.perPage;
       var end = start + this.perPage;
       var filteredCountries = this.countries;
-
-      // TODO: prerobit filter
       if (this.sortDirection === "asc") {
         // sort countries in ascending order based on name
         filteredCountries.sort(function (a, b) {
@@ -20121,7 +20119,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     },
     // load next page
-    // TODO: prerobit loadNext
     loadNext: function loadNext() {
       var _this3 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
