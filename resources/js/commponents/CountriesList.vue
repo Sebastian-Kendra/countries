@@ -58,7 +58,6 @@ export default {
             isAllDataLoaded: false,
             isLoading: false,
             sortDirection: "",
-            isOpen: false,
             selectedContinent: "",
         };
     },
@@ -120,7 +119,9 @@ export default {
             }
 
             const nextPage = this.currentPage + 1;
-            if (nextPage > this.lastLoadedPage) {
+            const previousPage = this.currentPage;
+
+            if (nextPage > this.lastLoadedPage || nextPage === previousPage) {
                 this.isLoading = true;
                 const response = await axios.get(
                     `/api/countries?page=${nextPage}`
@@ -144,8 +145,6 @@ export default {
                     this.isAllDataLoaded = true;
                 }
                 this.isLoading = false;
-            } else {
-                this.isAllDataLoaded = true;
             }
         },
     },

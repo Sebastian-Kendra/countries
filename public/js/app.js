@@ -20056,7 +20056,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       isAllDataLoaded: false,
       isLoading: false,
       sortDirection: "",
-      isOpen: false,
       selectedContinent: ""
     };
   },
@@ -20118,7 +20117,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     loadNext: function loadNext() {
       var _this3 = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var nextPage, response, newCountries;
+        var nextPage, previousPage, response, newCountries;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
@@ -20129,14 +20128,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               return _context.abrupt("return");
             case 2:
               nextPage = _this3.currentPage + 1;
-              if (!(nextPage > _this3.lastLoadedPage)) {
-                _context.next = 14;
+              previousPage = _this3.currentPage;
+              if (!(nextPage > _this3.lastLoadedPage || nextPage === previousPage)) {
+                _context.next = 13;
                 break;
               }
               _this3.isLoading = true;
-              _context.next = 7;
+              _context.next = 8;
               return axios.get("/api/countries?page=".concat(nextPage));
-            case 7:
+            case 8:
               response = _context.sent;
               newCountries = response.data.data.filter(function (country) {
                 return !_this3.loadedCountries.includes(country);
@@ -20151,11 +20151,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this3.isAllDataLoaded = true;
               }
               _this3.isLoading = false;
-              _context.next = 15;
-              break;
-            case 14:
-              _this3.isAllDataLoaded = true;
-            case 15:
+            case 13:
             case "end":
               return _context.stop();
           }
