@@ -106,7 +106,6 @@ export default {
         },
         onPageSelected(direction) {
             // update current page based on navigation direction
-            // TODO: prerobit loadNext
             if (direction === 1) {
                 this.loadNext();
                 this.currentPage = this.currentPage + direction;

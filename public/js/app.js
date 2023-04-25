@@ -20107,7 +20107,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     onPageSelected: function onPageSelected(direction) {
       // update current page based on navigation direction
-      // TODO: prerobit loadNext
       if (direction === 1) {
         this.loadNext();
         this.currentPage = this.currentPage + direction;
