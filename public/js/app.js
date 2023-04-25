@@ -20057,8 +20057,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       isLoading: false,
       sortDirection: "",
       isOpen: false,
-      selectedContinent: "",
-      totalCountries: 0
+      selectedContinent: ""
     };
   },
   mounted: function mounted() {
@@ -20067,8 +20066,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     axios.get("/api/countries/").then(function (response) {
       _this.loadedCountries = response.data.data;
       _this.countries = _this.loadedCountries;
-      _this.totalCountries = response.data.total;
-      console.log(_this.countries);
     });
   },
   computed: {
@@ -20149,9 +20146,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this3.loadedCountries = [].concat(_toConsumableArray(_this3.loadedCountries), _toConsumableArray(newCountries));
                 _this3.countries = [].concat(_toConsumableArray(_this3.countries), _toConsumableArray(newCountries)).slice(0, nextPage * _this3.perPage);
                 _this3.currentPage = nextPage;
-                _this3.lastLoadedPage = nextPage; // uložíme poslednú načítanú stránku
+                _this3.lastLoadedPage = nextPage;
               }
-
               if (_this3.loadedCountries.length >= response.data.total) {
                 _this3.isAllDataLoaded = true;
               }

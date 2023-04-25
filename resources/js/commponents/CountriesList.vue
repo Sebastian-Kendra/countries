@@ -60,7 +60,6 @@ export default {
             sortDirection: "",
             isOpen: false,
             selectedContinent: "",
-            totalCountries: 0,
         };
     },
     mounted() {
@@ -68,8 +67,6 @@ export default {
         axios.get("/api/countries/").then((response) => {
             this.loadedCountries = response.data.data;
             this.countries = this.loadedCountries;
-            this.totalCountries = response.data.total;
-            console.log(this.countries);
         });
     },
     computed: {
@@ -142,7 +139,7 @@ export default {
                         nextPage * this.perPage
                     );
                     this.currentPage = nextPage;
-                    this.lastLoadedPage = nextPage; // uložíme poslednú načítanú stránku
+                    this.lastLoadedPage = nextPage;
                 }
                 if (this.loadedCountries.length >= response.data.total) {
                     this.isAllDataLoaded = true;
