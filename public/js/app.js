@@ -20068,8 +20068,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       _this.loadedCountries = response.data.data;
       _this.countries = _this.loadedCountries;
       _this.totalCountries = response.data.total;
+      console.log(_this.countries);
     });
-    console.log(this.isAllDataLoaded);
   },
   computed: {
     displayedCountries: function displayedCountries() {
@@ -20162,7 +20162,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               _context.next = 15;
               break;
             case 14:
-              console.log("Stránka už bola načítaná");
+              _this3.isAllDataLoaded = true;
             case 15:
             case "end":
               return _context.stop();

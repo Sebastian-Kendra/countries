@@ -69,9 +69,8 @@ export default {
             this.loadedCountries = response.data.data;
             this.countries = this.loadedCountries;
             this.totalCountries = response.data.total;
+            console.log(this.countries);
         });
-
-        console.log(this.isAllDataLoaded);
     },
     computed: {
         displayedCountries() {
@@ -152,7 +151,7 @@ export default {
                 }
                 this.isLoading = false;
             } else {
-                console.log("Stránka už bola načítaná");
+                this.isAllDataLoaded = true;
             }
         },
     },
