@@ -33,7 +33,7 @@
             </tbody>
 
             <PaginateNav
-                :countries-len="displayedCountries.length"
+                :countries-len="this.displayedCountries.length"
                 :current-page="currentPage"
                 @page-selected="onPageSelected"
             />
@@ -53,8 +53,10 @@ export default {
             countries: [],
             loadedCountries: [],
             currentPage: 1,
+            lastLoadedPage: 0,
             perPage: 10,
             isAllDataLoaded: false,
+            isLoading: false,
             sortDirection: "",
             isOpen: false,
             selectedContinent: "",
@@ -68,6 +70,8 @@ export default {
             this.countries = this.loadedCountries;
             this.totalCountries = response.data.total;
         });
+
+        console.log(this.isAllDataLoaded);
     },
     computed: {
         displayedCountries() {
@@ -118,28 +122,37 @@ export default {
         // load next page
         // TODO: prerobit loadNext
         async loadNext() {
+            if (this.isLoading || this.isAllDataLoaded) {
+                return;
+            }
+
             const nextPage = this.currentPage + 1;
-            // overiť, či už boli načítané všetky krajiny
-            if (!this.isAllDataLoaded) {
+            if (nextPage > this.lastLoadedPage) {
+                this.isLoading = true;
                 const response = await axios.get(
                     `/api/countries?page=${nextPage}`
                 );
                 const newCountries = response.data.data.filter(
                     (country) => !this.loadedCountries.includes(country)
-                ); // len nové krajiny
+                );
                 if (newCountries.length > 0) {
                     this.loadedCountries = [
                         ...this.loadedCountries,
                         ...newCountries,
-                    ]; // pridá nové krajiny do pole na uchovávanie načítaných krajín
+                    ];
                     this.countries = [...this.countries, ...newCountries].slice(
                         0,
                         nextPage * this.perPage
-                    ); // pridá nové krajiny do zobrazených krajín
+                    );
                     this.currentPage = nextPage;
-                } else {
+                    this.lastLoadedPage = nextPage; // uložíme poslednú načítanú stránku
+                }
+                if (this.loadedCountries.length >= response.data.total) {
                     this.isAllDataLoaded = true;
                 }
+                this.isLoading = false;
+            } else {
+                console.log("Stránka už bola načítaná");
             }
         },
     },

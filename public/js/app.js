@@ -20051,8 +20051,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       countries: [],
       loadedCountries: [],
       currentPage: 1,
+      lastLoadedPage: 0,
       perPage: 10,
       isAllDataLoaded: false,
+      isLoading: false,
       sortDirection: "",
       isOpen: false,
       selectedContinent: "",
@@ -20067,6 +20069,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       _this.countries = _this.loadedCountries;
       _this.totalCountries = response.data.total;
     });
+    console.log(this.isAllDataLoaded);
   },
   computed: {
     displayedCountries: function displayedCountries() {
@@ -20126,26 +20129,41 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
-              nextPage = _this3.currentPage + 1; // overiť, či už boli načítané všetky krajiny
-              if (_this3.isAllDataLoaded) {
-                _context.next = 7;
+              if (!(_this3.isLoading || _this3.isAllDataLoaded)) {
+                _context.next = 2;
                 break;
               }
-              _context.next = 4;
+              return _context.abrupt("return");
+            case 2:
+              nextPage = _this3.currentPage + 1;
+              if (!(nextPage > _this3.lastLoadedPage)) {
+                _context.next = 14;
+                break;
+              }
+              _this3.isLoading = true;
+              _context.next = 7;
               return axios.get("/api/countries?page=".concat(nextPage));
-            case 4:
+            case 7:
               response = _context.sent;
               newCountries = response.data.data.filter(function (country) {
                 return !_this3.loadedCountries.includes(country);
-              }); // len nové krajiny
+              });
               if (newCountries.length > 0) {
-                _this3.loadedCountries = [].concat(_toConsumableArray(_this3.loadedCountries), _toConsumableArray(newCountries)); // pridá nové krajiny do pole na uchovávanie načítaných krajín
-                _this3.countries = [].concat(_toConsumableArray(_this3.countries), _toConsumableArray(newCountries)).slice(0, nextPage * _this3.perPage); // pridá nové krajiny do zobrazených krajín
+                _this3.loadedCountries = [].concat(_toConsumableArray(_this3.loadedCountries), _toConsumableArray(newCountries));
+                _this3.countries = [].concat(_toConsumableArray(_this3.countries), _toConsumableArray(newCountries)).slice(0, nextPage * _this3.perPage);
                 _this3.currentPage = nextPage;
-              } else {
+                _this3.lastLoadedPage = nextPage; // uložíme poslednú načítanú stránku
+              }
+
+              if (_this3.loadedCountries.length >= response.data.total) {
                 _this3.isAllDataLoaded = true;
               }
-            case 7:
+              _this3.isLoading = false;
+              _context.next = 15;
+              break;
+            case 14:
+              console.log("Stránka už bola načítaná");
+            case 15:
             case "end":
               return _context.stop();
           }
@@ -20468,7 +20486,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       _: 2 /* DYNAMIC */
     }, 1032 /* PROPS, DYNAMIC_SLOTS */, ["to"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(country.continent_code), 1 /* TEXT */)]);
   }), 128 /* KEYED_FRAGMENT */))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_PaginateNav, {
-    "countries-len": $options.displayedCountries.length,
+    "countries-len": this.displayedCountries.length,
     "current-page": $data.currentPage,
     onPageSelected: $options.onPageSelected
   }, null, 8 /* PROPS */, ["countries-len", "current-page", "onPageSelected"])])]);
